@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>管理画面</title>
+</head>
+<body>
+
+<h2>ログイン</h2>
+
+<input id="email" placeholder="メール">
+<input id="password" type="password" placeholder="パスワード">
+<button onclick="login()">ログイン</button>
+
+<hr>
+
+<div id="admin-panel" style="display:none;">
+  <h1>運行管理</h1>
+
+  <input id="number" placeholder="列車番号">
+  <input id="cars" placeholder="両数">
+  <input id="next" placeholder="次駅">
+
+  <button onclick="send()">送信</button>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
