@@ -6,24 +6,50 @@
 </head>
 <body>
 
-<h2>ログイン</h2>
+<h2 id="login-title">ログイン</h2>
 
-<input id="email" placeholder="メール">
-<input id="password" type="password" placeholder="パスワード">
-<button onclick="login()">ログイン</button>
+<div id="login-form">
+  <input id="email" placeholder="メール">
+  <input id="password" type="password" placeholder="パスワード">
+  <button onclick="login()">ログイン</button>
+</div>
 
 <hr>
 
 <div id="admin-panel" style="display:none;">
+
   <h1>運行管理</h1>
 
+  <h3>基本情報</h3>
   <input id="number" placeholder="列車番号">
   <input id="cars" placeholder="両数">
   <input id="next" placeholder="次駅">
 
   <button onclick="send()">送信</button>
+
+  <hr>
+
+  <h3>種別ワンタップ</h3>
+
+  <button onclick="setType('普通','Local','#cccccc','jr')">普通</button>
+  <button onclick="setType('区間快速','Area Rapid','#00C070','jr')">区間快速</button>
+  <button onclick="setType('快速','Rapid','#FF7A2F','jr')">快速</button>
+  <button onclick="setType('特急','Express','#FF0000','jr')">特急</button>
+  <button onclick="setType('④','Holiday','#00C070','jr')">ホリデー</button>
+  <button onclick="setType('回送','Not in service','#cccccc','gothic')">回送</button>
+  <button onclick="setType('試運転','Test run','#cccccc','gothic')">試運転</button>
+
+  <hr>
+
+  <h3>駅設定</h3>
+
+  <div id="stations"></div>
+
+  <button onclick="addStation()">駅を追加</button>
+
 </div>
 
 <script type="module" src="admin.js"></script>
+
 </body>
 </html>

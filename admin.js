@@ -39,17 +39,58 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-/*データ送信*/
 window.send = function () {
+
   const number = document.getElementById("number").value;
   const cars = document.getElementById("cars").value;
   const next = document.getElementById("next").value;
 
+  let stations = [];
+
+  for (let i = 0; i < stationCount; i++) {
+    const name = document.getElementById(`name-${i}`).value;
+    const time = Number(document.getElementById(`time-${i}`).value);
+
+    if (name && !isNaN(time)) {
+      stations.push({
+        name: name,
+        time: time,
+        stop: true
+      });
+    }
+  }
+
   set(ref(db, "train"), {
     number,
     cars,
-    next
+    next,
+    startTime: Math.floor(Date.now() / 1000), // ←これでOK（毎回リセット式）
+    stations
   });
 
   alert("送信した！");
+};
+
+let stationCount = 0;
+
+window.addStation = function () {
+  const container = document.getElementById("stations");
+
+  const div = document.createElement("div");
+
+  div.innerHTML = `
+    <input placeholder="駅名" id="name-${stationCount}">
+    <input placeholder="到着秒" id="time-${stationCount}">
+    <input placeholder="停車秒" id="stop-${stationCount}">
+  `;
+
+  container.appendChild(div);
+  stationCount++;
+};
+
+window.setType = function(type, type_en, color, font) {
+  set(ref(db, "train/type"), type);
+  set(ref(db, "train/type_en"), type_en);
+  set(ref(db, "train/color"), color);
+  set(ref(db, "train/font"), font);
 };
